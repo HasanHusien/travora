@@ -7,7 +7,7 @@ import { Toaster } from "react-hot-toast";
 import AppLayout from "./pages/AppLayout";
 import Overview from "./pages/OverView";
 import Tour from "./pages/Tour";
-import Login from "./features/login/Login";
+import Login from "./features/auth/Login";
 import { UserProvider } from "./contexts/userContext";
 
 const queryClient = new QueryClient({

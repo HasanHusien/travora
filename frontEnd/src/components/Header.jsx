@@ -1,8 +1,8 @@
 import { useUser } from "../contexts/userContext";
 
 function Header() {
-  const {user} = useUser();
-  console.log(user)
+  const { user } = useUser();
+  console.log(user);
   return (
     <header className="header">
       <nav className="nav nav--tours">
