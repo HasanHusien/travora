@@ -1,8 +1,14 @@
-import { useUser } from "../contexts/userContext";
+import { useUser } from "../features/auth/useUser";
+import { useTours } from "../react_query/useTours";
 
 function Header() {
-  const { user } = useUser();
-  console.log(user);
+  const { data: user, isLoading, error } = useUser();
+  const { isLoading: isLoading3 } = useTours();
+
+  // console.log(user);
+
+  if ( isLoading3) return null;
+
   return (
     <header className="header">
       <nav className="nav nav--tours">
@@ -18,7 +24,7 @@ function Header() {
       <nav className="nav nav--user">
         {user ? (
           <>
-            <a className="nav__el nav__el--logout">Log out</a>
+            <button className="nav__el nav__el--logout">Log out</button>
 
             <a className="nav__el" href="/me">
               <img

@@ -1,9 +1,10 @@
 import { useTours } from "../react_query/useTours";
 import Error from "../components/Error";
+import Spinner from "../components/Spinner";
 
 function Overview() {
   const { data, isLoading, error } = useTours();
-  const tours = data?.tours  || [];
+  const tours = data?.tours || [];
 
   // const [tours, setTours] = useState([]);
   // useEffect(() => {
@@ -15,7 +16,7 @@ function Overview() {
   //   getTours();
   // }, []);
 
-  if (isLoading) return <h1>Loading....</h1>;
+  if (isLoading) return <Spinner />;
   if (error) return <Error />;
 
   return (

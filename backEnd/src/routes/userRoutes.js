@@ -34,7 +34,7 @@ router.patch('/resetPassword/:token', resetPassword);
 router.use(protect);
 
 router.patch('/updateMyPassword', updatePassword);
-router.get('/me', getMe, getUser);
+router.get('/me', protect, getMe);
 router.patch('/updateMe', updateMe);
 router.delete('/deleteMe', deleteMe);
 

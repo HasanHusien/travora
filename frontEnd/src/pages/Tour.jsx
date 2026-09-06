@@ -5,14 +5,15 @@ import OverviewBox from "../components/OverViewBox";
 import ReviewCard from "../components/ReviewCard";
 import Map from "../components/Map";
 import Error from "../components/Error";
-
+import Spinner from "../components/Spinner";
 function Tour() {
   const { slug } = useParams();
   const { data, isLoading, error } = useTour(slug);
+
   const tour = data?.tour || [];
 
-  if (isLoading) return <h1>Loading...</h1>;
-  if (error) return <Error />
+  if (isLoading) return <Spinner />;
+  if (error) return <Error />;
 
   return (
     <>

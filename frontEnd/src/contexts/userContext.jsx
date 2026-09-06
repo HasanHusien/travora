@@ -1,12 +1,34 @@
-import { createContext, useContext, useState } from "react";
+import axios from "axios";
+import { createContext, useContext, useEffect, useState } from "react";
 
 const userContext = createContext();
 
 function UserProvider({ children }) {
-  const [user, setUser] = useState("");
+  const [user, setUser] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    async function getCurrentUser() {
+      try {
+        setIsLoading(true);
+        const res = await axios.get("/api/users/me", {
+          withCredentials: true,
+        });
+
+        setUser(res?.data?.data?.user);
+      } catch (err) {
+        setUser(null);
+        console.error(err);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+
+    getCurrentUser();
+  }, []);
 
   return (
-    <userContext.Provider value={{ user, setUser }}>
+    <userContext.Provider value={{ user, isLoading }}>
       {children}
     </userContext.Provider>
   );

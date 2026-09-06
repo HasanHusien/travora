@@ -1,18 +1,14 @@
 import axios from "axios";
-export async function login({ email, password }) {
-  try {
-    // using axios library
-    const res = await axios.post("/api/users/login", {
-      email,
-      password,
-    });
 
-    return res;
-    // console.log(res.locals);
-  } catch (err) {
-    // from axios docs response.data
-    console.error(err.response.data);
-  }
+export async function login({ email, password }) {
+  // using axios library
+  const data = await axios.post("/api/users/login", {
+    email,
+    password,
+  });
+
+  if (!data) console.error("Error fail to fetching");
+  return data;
 
   // const res = await fetch("/ap/users/login", {
   //   method: "POST",
@@ -30,6 +26,16 @@ export async function logout() {
   } catch (err) {
     console.error(err);
   }
+}
+
+export async function getCurrentUser() {
+  const data = await axios.get("/api/users/me", {
+    withCredentials: true,
+  });
+
+  if (!data) console.error("Error when getting data");
+
+  return data?.data?.data?.user || [];
 }
 
 // let dispatcher = null;

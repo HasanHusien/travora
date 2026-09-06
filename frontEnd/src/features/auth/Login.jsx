@@ -1,10 +1,7 @@
 import { useForm } from "react-hook-form";
-import { useUser } from "../../contexts/userContext";
-import { useNavigate } from "react-router-dom";
+import { useLogin } from "./useLogin";
 
-import axios from "axios";
-import toast from "react-hot-toast";
-// import { getLogin } from "../../services/apiUser";
+import Error from "../../components/Error";
 
 function Login() {
   const {
@@ -13,30 +10,13 @@ function Login() {
     // formState: { errors },
   } = useForm();
 
-  const { setUser } = useUser();
-  const navigate = useNavigate();
-
-  async function login({ email, password }) {
-    try {
-      const res = await axios.post("/api/users/login", { email, password });
-      // console.log(res.data.status);
-      setUser(res.data?.data?.user);
-      if (email && password) {
-        console.log(res.data.status);
-
-        if (res.data.status === "success") {
-          toast.success("Logged in successfully");
-          navigate("/");
-        }
-      }
-    } catch {
-      toast.error("something went wrong, email or password is Incorrect");
-    }
-  }
+  const { login, isLoading, error } = useLogin();
 
   function onSubmit({ email, password }) {
     login({ email, password });
   }
+
+  if (error) return <Error />;
 
   // console.log(watch("email"));
   return (
@@ -75,7 +55,11 @@ function Login() {
           </div>
 
           <div className="form__group">
-            <button className="btn btn--green" type="submit">
+            <button
+              className="btn btn--green"
+              type="submit"
+              disabled={isLoading}
+            >
               Login
             </button>
           </div>
