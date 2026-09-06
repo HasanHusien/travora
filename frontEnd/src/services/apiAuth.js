@@ -19,13 +19,10 @@ export async function login({ email, password }) {
 }
 
 export async function logout() {
-  try {
-    const res = await axios.get("/api/users/logout");
+  const res = await axios.get("/api/users/logout");
 
-    return res;
-  } catch (err) {
-    console.error(err);
-  }
+  console.log(res);
+  return res;
 }
 
 export async function getCurrentUser() {

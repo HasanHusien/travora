@@ -1,7 +1,6 @@
 import { useForm } from "react-hook-form";
 import { useLogin } from "./useLogin";
 
-import Error from "../../components/Error";
 // import { useIsLoggedIn } from "../../contexts/isLoggedInContext";
 
 function Login() {
@@ -17,11 +16,9 @@ function Login() {
   function onSubmit({ email, password }) {
     login({ email, password });
     
-
-    // setIsLoggedIn(true);
   }
 
-  if (error) return <Error />;
+  // if (error) return <Error />;
 
   // console.log(watch("email"));
   return (

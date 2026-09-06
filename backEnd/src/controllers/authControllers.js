@@ -104,7 +104,7 @@ exports.login = catchAsync(async (req, res, next) => {
   // });
 });
 
-
+// send empty jwt (same name)
 exports.logout = (req, res) => {
   res.cookie('jwt', 'loggedout', {
     expires: new Date(Date.now() + 10 * 1000),
@@ -165,7 +165,6 @@ exports.protect = catchAsync(async (req, res, next) => {
 // only for render pages
 exports.isLoggedIn = catchAsync(async (req, res, next) => {
   if (req.cookies.jwt) {
-
     // 1. verify token
     const decoded = await promisify(jwt.verify)(
       req.cookies.jwt,
@@ -185,7 +184,7 @@ exports.isLoggedIn = catchAsync(async (req, res, next) => {
     // so, there is logged in user
     res.locals.user = currentUser;
     // req.user = currentUser;
-   return next();
+    return next();
   }
   next();
 });
