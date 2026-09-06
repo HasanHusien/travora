@@ -3,12 +3,12 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 import { Toaster } from "react-hot-toast";
+import { IsLoggedInProvider } from "./contexts/isLoggedInContext";
 
 import AppLayout from "./pages/AppLayout";
 import Overview from "./pages/OverView";
 import Tour from "./pages/Tour";
 import Login from "./features/auth/Login";
-import { UserProvider } from "./contexts/userContext";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -20,7 +20,7 @@ const queryClient = new QueryClient({
 
 function App() {
   return (
-    <UserProvider>
+    <IsLoggedInProvider>
       <QueryClientProvider client={queryClient}>
         <ReactQueryDevtools initialIsOpen={true} />
         <BrowserRouter>
@@ -34,7 +34,7 @@ function App() {
           <Toaster position="top-center" reverseOrder={false} />
         </BrowserRouter>
       </QueryClientProvider>
-    </UserProvider>
+    </IsLoggedInProvider>
   );
 }
 

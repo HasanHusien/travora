@@ -6,6 +6,8 @@ import toast from "react-hot-toast";
 export function useLogin() {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
+
+
   const {
     mutate: login,
     isLoading,
@@ -15,7 +17,6 @@ export function useLogin() {
     onSuccess: (data) => {
       // console.log(data.data.data.user);
       queryClient.setQueryData(["user"], data.data.data.user);
-
       toast.success("logged in correctly");
       navigate("/", { replace: true });
       // window.location.replace("/");

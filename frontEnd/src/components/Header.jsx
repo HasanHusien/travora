@@ -2,7 +2,7 @@ import { useUser } from "../features/auth/useUser";
 import { useTours } from "../react_query/useTours";
 
 function Header() {
-  const { data: user, isLoading, error } = useUser();
+  const { data: user, error } = useUser();
   const { isLoading: isLoading3 } = useTours();
 
   // console.log(user);
